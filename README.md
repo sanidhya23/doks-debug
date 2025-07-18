@@ -8,12 +8,12 @@ This is forked from [DOKS](https://github.com/digitalocean/doks-debug). This ima
 Run as pod
 Deploy as demonset so that pod is deployed on all the available nodes
 ```
-kubectl apply -f k8s/daemonset.yaml
+kubectl apply -f daemonset.yaml
 ```
 
 Deploy as deployment so that pod(s) is deployed as per the node affinity or tolerations specified in the manifest file
 ```
-kubectl apply -f k8s/deployment.yaml
+kubectl apply -f deployment.yaml
 ```
 
 
