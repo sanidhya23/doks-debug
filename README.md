@@ -56,12 +56,15 @@ Once you're in, you have access to the set of tools listed in the Dockerfile. Th
 - [wget](https://www.gnu.org/software/wget) - for retrieving files using HTTP, HTTPS, FTP and FTPS.
 - [crictl](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md) - A CLI for CRI endpoints. Configured to use /run/containerd/containerd.sock as a default endpoint.
 
-Examples
+**Examples**
+Run crictl
 ```
-crictl
 crictl ps
 crictl pods
-chroot + systemctl
+```
+
+Run chroot and systemctl
+```
 chroot /host /bin/bash
 systemctl status kubelet
 journalctl -xe
