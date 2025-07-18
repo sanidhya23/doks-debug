@@ -1,10 +1,13 @@
 **Description**
+
 A Docker image with Kubernetes manifests for investigation and troubleshooting your cluster.
 
-**Purpose**
+**Purpose** 
+
 This is forked from [DOKS](https://github.com/digitalocean/doks-debug). This image used to deploy a debug pod or to deploy ephemerel container within a pod to provide debugging utilities for troubleshooting
 
 **Usage**
+
 Run as pod
 Deploy as demonset so that pod is deployed on all the available nodes
 ```
@@ -18,11 +21,10 @@ kubectl apply -f deployment.yaml
 
 
 This Pod will do following:
-
-Use hostPID, hostIPC, and hostNetwork.
-Mount the entire host filesystem to /host in the containers.
-Mount the containerd socket at /run/containerd/containerd.sock from the host into the container.
-In order to make use of these workloads, you can exec into a pod of choice by name:
+- Use hostPID, hostIPC, and hostNetwork.
+- Mount the entire host filesystem to /host in the containers.
+- Mount the containerd socket at /run/containerd/containerd.sock from the host into the container.
+- In order to make use of these workloads, you can exec into a pod of choice by name:
 
 ```
 kubectl -n kube-system exec -it my-pod-name -- bash
