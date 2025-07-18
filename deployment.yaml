@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doks-debug
+  namespace: test
+  labels:
+    app: doks-debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: doks-debug
+  template:
+    metadata:
+      labels:
+        name: doks-debug
+    spec:
+      dnsPolicy: ClusterFirstWithHostNet
+      hostPID: true
+      hostIPC: true
+      hostNetwork: true
+      tolerations:
+      - operator: Exists
+      containers:
+      - name: doks-debug
+        securityContext:
+          privileged: true
+        image: doks-debug:latest
+        command: [ "sleep", "infinity" ]
+        resources:
+          requests:
+            memory: "0"
+            cpu: "0"
+          limits:
+            memory: "500Mi"
+            cpu: "500m"
+        volumeMounts:
+          - name: host
+            mountPath: /host
+          - name: containerd
+            mountPath: /run/containerd/containerd.sock
+      terminationGracePeriodSeconds: 0
+      volumes:
+        - name: host
+          hostPath:
+            path: /
+        - name: containerd
+          hostPath:
+            path: /run/containerd/containerd.sock
+            type: Socket
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 100%
+    type: RollingUpdate
